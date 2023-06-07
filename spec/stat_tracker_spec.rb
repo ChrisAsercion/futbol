@@ -26,6 +26,7 @@ RSpec.describe 'Stat_Tracker' do
     #expect(csv2[0][1]).to eq("team_id")
     csv3 = CSV.parse(File.read('./data/game_teams.csv'))
     #x.from_csv(csv)
+    require 'pry'; binding.pry
     x.from_csv(csv2)
     #x.from_csv(csv3)
     require 'pry'; binding.pry
