@@ -7,7 +7,7 @@ class StatTracker
       teams_csv(csv)
     elsif csv[0][1] == "season"
       games_csv(csv)
-    else
+    else #csv[0][1] == "team_id"
       game_teams_csv(csv)
     end
   end

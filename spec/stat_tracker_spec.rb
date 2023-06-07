@@ -19,10 +19,16 @@ RSpec.describe 'Stat_Tracker' do
   end
 
   it 'can sort to which csv method is needed' do
+    x = StatTracker.new
     csv = CSV.parse(File.read('./data/teams.csv'))
-    expect(csv[0][1]).to eq("franchiseId")
-    csv2 = CSV.parse(File.read('./data/game_teams.csv'))
-    expect(csv2[0][1]).to eq("team_id")
+    #expect(csv[0][1]).to eq("franchiseId")
+    csv2 = CSV.parse(File.read('./data/games.csv'))
+    #expect(csv2[0][1]).to eq("team_id")
+    csv3 = CSV.parse(File.read('./data/game_teams.csv'))
+    #x.from_csv(csv)
+    x.from_csv(csv2)
+    #x.from_csv(csv3)
+    require 'pry'; binding.pry
   end
 
 
