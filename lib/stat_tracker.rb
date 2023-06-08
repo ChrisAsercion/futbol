@@ -4,43 +4,27 @@ require './lib/game_factory'
 require "csv"
 
 class StatTracker 
+  attr_reader :teams_array, :game_teams_array, :games_array
   
   def initialize
-    @teams = []
-    @game_teams = []
+    @games_array = create_games_array
+    @teams_array = create_teams_array
+    @game_teams_array = create_game_teams_array
   end
 
-  def from_csv(path)
-    if path == './data/games.csv'
-      create_games_array(path)
-    elsif path == './data/teams.csv'
-      create_teams_array(path)
-    else
-      './data/game_teams.csv'
-      create_game_teams_array(path)
-    end
-  end
+  def create_games_array
+    game_factory = GameFactory.new
+    game_factory.create_games
+   end
 
-  def create_teams_array(path)
+  def create_teams_array
     team_factory = TeamFactory.new
-    team_factory.create_teams(path)
-    require 'pry'; binding.pry
-  end
+    team_factory.create_teams
+  end  
   
-
-  def create_games_array(path)
-   game_factory = GameFactory.new
-   game_factory.create_games(path)
-   require 'pry'; binding.pry
-  end
-
-
-
-  def create_game_teams_array(path)
+  def create_game_teams_array
     game_teams_factory = GameTeamsFactory.new
-    game_teams_factory.create_game_teams(path)
-    require 'pry'; binding.pry
+    game_teams_factory.create_game_teams
   end
-
 
 end

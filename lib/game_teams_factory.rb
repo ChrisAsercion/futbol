@@ -1,13 +1,9 @@
 class GameTeamsFactory
   attr_reader :game_teams
 
-  def initialize
-    @game_teams = []
-  end 
-
-
-  def create_game_teams(path)
-    CSV.foreach(path, headers: true, header_converters: :symbol) do |row|
+  def create_game_teams
+    game_teams = []
+    CSV.foreach('./data/game_teams.csv', headers: true, header_converters: :symbol) do |row|
       game_teams_details = {
         :game_id => row[:game_id], 
         :team_id => row[:team_id],
@@ -27,6 +23,7 @@ class GameTeamsFactory
       }
       game_teams.push(game_teams_details)
     end
+    game_teams
   end
 
 
