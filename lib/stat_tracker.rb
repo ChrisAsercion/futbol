@@ -1,57 +1,45 @@
+require './lib/team_factory'
+require './lib/game_teams_factory'
+require './lib/game_factory'
 require "csv"
 
-class StatTracker
+class StatTracker 
   
-  def from_csv(csv)
-    if csv[0][1] == "franchiseId"
-      teams_csv(csv)
-    elsif csv[0][1] == "season"
-      games_csv(csv)
+  def initialize
+    @teams = []
+    @game_teams = []
+  end
+
+  def from_csv(path)
+    if path == './data/games.csv'
+      create_games_array(path)
+    elsif path == './data/teams.csv'
+      create_teams_array(path)
     else
-      game_teams_csv(csv)
+      './data/game_teams.csv'
+      create_game_teams_array(path)
     end
   end
 
-  def teams_csv(csv)
-    team_id = csv[0].index("team_id")
-    franchiseId = csv[0].index("franchiseId")
-    teamName = csv[0].index("teamName")
-    abbreviation = csv[0].index("abbreviation")
-    stadium = csv[0].index("Stadium")
-    link = csv[0].index("link")
-      new_arr = csv.map do |team|
-      {:team_id => team[team_id], 
-      :franciseId => team[franchiseId],
-      :abbreviation => team[abbreviation],
-      :stadium => team[stadium], 
-      :link => team[link]}
-      end
-      new_arr.drop(1)
+  def create_teams_array(path)
+    team_factory = TeamFactory.new
+    team_factory.create_teams(path)
+    require 'pry'; binding.pry
+  end
+  
 
-    #if teams ^^^
-
-    #if games >>> game csv
-
-    #elsif games teams >>> games_teams
+  def create_games_array(path)
+   game_factory = GameFactory.new
+   game_factory.create_games(path)
+   require 'pry'; binding.pry
   end
 
-  def game_teams_csv(csv)
-    game_id = csv[0].index("game_id")
-    season = csv[0].index("season")
-    teamName = csv[0].index("teamName")
-    abbreviation = csv[0].index("abbreviation")
-    stadium = csv[0].index("Stadium")
-    link = csv[0].index("link")
-      new_arr = csv.map do |team|
-      {:team_id => team[team_id], 
-      :franciseId => team[franchiseId],
-      :abbreviation => team[abbreviation],
-      :stadium => team[stadium], 
-      :link => team[link]}
-      end
-      new_arr.drop(1)
-  end
 
+
+  def create_game_teams_array(path)
+    game_teams_factory = GameTeamsFactory.new
+    game_teams_factory.create_game_teams(path)
+    require 'pry'; binding.pry
   def highest_sum
 
   end
