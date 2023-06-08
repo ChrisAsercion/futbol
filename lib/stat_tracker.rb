@@ -37,17 +37,30 @@ class StatTracker
 
   def game_teams_csv(csv)
     game_id = csv[0].index("game_id")
-    season = csv[0].index("season")
-    teamName = csv[0].index("teamName")
-    abbreviation = csv[0].index("abbreviation")
-    stadium = csv[0].index("Stadium")
-    link = csv[0].index("link")
+    team_id = csv[0].index("team_id")
+    hoa = csv[0].index("HoA")
+    result = csv[0].index("settled_in")
+    head_coach = csv[0].index("head_coach")
+    goals = csv[0].index("goals")
+    shots = csv[0].index("shots")
+    tackles = csv[0].index("tackles")
+    pim = csv[0].index("pim")
+    power_play_opportunities = csv[0].index("powerPlayOpportunities")
+    power_play_goals = csv[0].index("powerPlayGoals")
+    face_off_win_percentage = csv[0].index("faceOffWinPercentage")
+    giveaways = csv[0].index("giveaways")
+    takeaways = csv[0].index("takeaways")
       new_arr = csv.map do |team|
-      {:team_id => team[team_id], 
-      :franciseId => team[franchiseId],
-      :abbreviation => team[abbreviation],
-      :stadium => team[stadium], 
-      :link => team[link]}
+      {:game_id => team[game_id], 
+      :team_id => team[team_id],
+      :HoA => team[hoa],
+      :result => team[result], 
+      :settled_in => team[settled_in]
+      :head_coach => team[head_coach],
+      :goals => team[goals], 
+      :shots => team[shots],
+      :tackles => team[tackles], 
+      :pim => team[pim]}
       end
       new_arr.drop(1)
   end
