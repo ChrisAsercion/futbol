@@ -26,4 +26,13 @@ RSpec.describe 'Game' do
     
   end
 
+  it 'can average goals by season' do
+    x = StatTracker.new
+    csv = CSV.parse(File.read('./data/games.csv'))
+    csv_array_hash = x.from_csv(csv)
+    y = Game.new
+    #require 'pry'; binding.pry
+    y.average_goals_by_season(csv_array_hash)
+  end
+
 end
