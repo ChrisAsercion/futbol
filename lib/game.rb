@@ -41,13 +41,14 @@ class Game
       @goals_by_season[game[:season]] = []
     end
     csv_array.each do |game|
-      require 'pry'; binding.pry
-      if game[:season] == csv_array[:season]
-        all_goals = score[:away_goals].to_i + score[:home_goals].to_i
+      if @goals_by_season.keys.include?(game[:season])
+        all_goals = game[:away_goals].to_i + game[:home_goals].to_i
         @goals_by_season[game[:season]]<< all_goals
       end
-      require 'pry'; binding.pry
     end
+    @goals_by_season.transform_values! {|v| v.sum.to_f / v.count}
+    @goals_by_season.transform_values! {|v| v.round(2)}
+    require 'pry'; binding.pry
   end
 
 # get all the season keys out of the OG array hash
