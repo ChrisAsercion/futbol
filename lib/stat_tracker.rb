@@ -42,6 +42,8 @@ class StatTracker
       new_arr.drop(1)
   end
 
+  def highest_sum
+
 
 
 end
