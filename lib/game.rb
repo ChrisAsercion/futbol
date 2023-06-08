@@ -16,27 +16,6 @@ class Game
   end
 
   def average_goals_by_season(csv_array)
-    total_goals = []
-    csv_array.each do |game|
-        #@goals_by_season[game[:season]] = []
-        require 'pry'; binding.pry
-      if game[:season] == csv_array[:season]
-          #csv_array.each do |score|
-            all_goals = score[:away_goals].to_i + score[:home_goals].to_i
-            total_goals << all_goals
-            average_goals == total_goals.to_f / total_goals.count
-            @goals_by_season[game[:season]] = average_goals 
-          #end
-      end
-      # else
-      #   csv_array.each do |score|
-      #     @goals_by_season[game[:season]] << score[:away_goals].to_i + score[:home_goals].to_i
-      # end
-      @goals_by_season[game[:season]]
-    end
-  end
-
-  def average_goals_by_season(csv_array)
     csv_array.each do |game|
       @goals_by_season[game[:season]] = []
     end
