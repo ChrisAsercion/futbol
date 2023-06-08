@@ -41,18 +41,15 @@ class Game
       @goals_by_season[game[:season]] = []
     end
     csv_array.each do |game|
-      if @goals_by_season.keys.include?(game[:season])
-        all_goals = game[:away_goals].to_i + game[:home_goals].to_i
-        @goals_by_season[game[:season]]<< all_goals
-      end
+      all_goals = game[:away_goals].to_i + game[:home_goals].to_i
+      @goals_by_season[game[:season]]<< all_goals
     end
     @goals_by_season.transform_values! {|v| v.sum.to_f / v.count}
     @goals_by_season.transform_values! {|v| v.round(2)}
     require 'pry'; binding.pry
   end
 
-# get all the season keys out of the OG array hash
-#Then iterate over the array hash again finding each of the games that have that season key
-# from there 
-#transform values { |v| v.sum}
+#The first enumeration will assign a key to the @goals_by_season hash that is the number of the season and a value of and empty hash
+#The 2nd enumeration will gather all goals in game and then add them to the array value that is associated to that season
+#transform_values will display a new hash that averages then rounds
 end
