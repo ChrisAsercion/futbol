@@ -20,9 +20,9 @@ class GameFactory
         :venue => row[:venue],
         :venue_link => row[:venue_link]
       }
-    @games.push(game_details)
+      @games.push(game_details)
+    end
   end
-end
   
   def percentage_home_wins
     home_wins = 0 

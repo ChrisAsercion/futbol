@@ -8,6 +8,7 @@ class StatTracker
   def initialize
     @teams = []
     @game_teams = []
+    @games = []
   end
 
   def from_csv(path)
@@ -24,14 +25,16 @@ class StatTracker
   def create_teams_array(path)
     team_factory = TeamFactory.new
     team_factory.create_teams(path)
+    team_factory.teams
     #require 'pry'; binding.pry
   end
   
 
   def create_games_array(path)
-   game_factory = GameFactory.new
-   game_factory.create_games(path)
-   #require 'pry'; binding.pry
+    game_factory = GameFactory.new
+    game_factory.create_games(path)
+    game_factory.games
+    require 'pry'; binding.pry
   end
 
 
@@ -39,7 +42,7 @@ class StatTracker
   def create_game_teams_array(path)
     game_teams_factory = GameTeamsFactory.new
     game_teams_factory.create_game_teams(path)
-    require 'pry'; binding.pry
+    game_teams_factory.game_teams
   end
 
 

@@ -29,17 +29,21 @@ RSpec.describe 'Stat_Tracker' do
 
   it 'creates GameFactory with games as a hash' do
     stat_tracker = StatTracker.new
+    require 'pry'; binding.pry
     stat_tracker.from_csv(path)
+    require 'pry'; binding.pry
   end
 
   it 'creates TeamFactory with team as a hash' do
     stat_tracker = StatTracker.new
     stat_tracker.from_csv(path_2)
+    require 'pry'; binding.pry
   end
 
   it 'creates GameTeamsFactory with game team as a hash' do
     stat_tracker = StatTracker.new
     stat_tracker.from_csv(path_3)
+    require 'pry'; binding.pry
   end
 
 end
