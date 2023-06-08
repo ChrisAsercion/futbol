@@ -54,6 +54,8 @@ class StatTracker
 
   def highest_sum
 
+  end
+
   def games_csv(csv)
     game_id = csv[0].index("game_id")
     season = csv[0].index("season")
