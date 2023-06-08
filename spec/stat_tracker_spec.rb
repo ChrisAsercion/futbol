@@ -4,8 +4,10 @@ require "csv"
 
 RSpec.describe 'Stat_Tracker' do
   it 'exists as a csv hash' do
-    csv = CSV.parse(File.read('./data/teams.csv'))
-    require 'pry'; binding.pry
+    csv = CSV
+      .read('./data/teams.csv', headers: true, header_converters: :symbol)
+      .to_a
+    
     expect(csv).to be_a(Array)
 
   end

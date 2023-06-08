@@ -1,3 +1,5 @@
+require './lib/game_stats'
+require './lib/game_factory'
 require './lib/stat_tracker'
 require "csv"
 
@@ -11,18 +13,18 @@ locations = {
   game_teams: game_teams_path
 }
 #require 'pry'; binding.pry
-def list_out
-  id = @csv[0].index("id")
-  first_Name = @csv[0].index("first_Name")
-  last_Name = @csv[0].index("last_Name")
-  zipcode = @csv[0].index("Zipcode")
-   new_arr = @csv.map do |attendee|
-   Attendee.new(attendee[id], attendee[first_Name], attendee[last_Name], attendee[zipcode])
-   end
-   new_arr.drop(1)
-end
+# def list_out
+#   id = @csv[0].index("id")
+#   first_Name = @csv[0].index("first_Name")
+#   last_Name = @csv[0].index("last_Name")
+#   zipcode = @csv[0].index("Zipcode")
+#    new_arr = @csv.map do |attendee|
+#    Attendee.new(attendee[id], attendee[first_Name], attendee[last_Name], attendee[zipcode])
+#    end
+#    new_arr.drop(1)
+# end
 
-p CSV.parse(File.read('./data/teams.csv'), headers: true)
+
 
 #p CSV.read './data/teams.csv'#, headers: true
 #contents = CSV.read './teams.csv'#, headers: true, header_converters: :symbol
@@ -31,3 +33,7 @@ p CSV.parse(File.read('./data/teams.csv'), headers: true)
 #p locations
 
 require 'pry'; binding.pry
+
+games = GameFactory.new(game_path).games
+game_stats = GameStats.new(games)
+p game_stats.highest_total_score
