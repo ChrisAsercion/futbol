@@ -46,4 +46,9 @@ class StatTracker
   end
 
 
+  def highest_scoring_visitor
+    
+  end
+
+
 end
