@@ -34,7 +34,6 @@ class StatTracker
     game_factory = GameFactory.new
     game_factory.create_games(path)
     game_factory.games
-    require 'pry'; binding.pry
   end
 
 
@@ -46,8 +45,18 @@ class StatTracker
   end
 
 
-  def highest_scoring_visitor
-    
+  def highest_scoring_visitor(csv)
+    highest_scores = {}
+    csv.each do |game|
+      if highest_scores[game[:away_team_id]] == nil
+        highest_scores[game[:away_team_id]] = []
+        highest_scores[game[:away_team_id]] << game[:away_goals]
+      else 
+        highest_scores[game[:away_team_id]] << game[:away_goals]
+      end
+    end
+    require 'pry'; binding.pry
+
   end
 
 

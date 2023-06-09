@@ -48,4 +48,10 @@ RSpec.describe 'Stat_Tracker' do
     require 'pry'; binding.pry
   end
 
+  it 'can find the highest scoring visitor' do
+    stat_tracker = StatTracker.new
+    x = stat_tracker.from_csv(path)
+    stat_tracker.highest_scoring_visitor(x)
+  end
+
 end
