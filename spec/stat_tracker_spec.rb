@@ -42,7 +42,8 @@ RSpec.describe 'Stat_Tracker' do
 
   it 'creates GameTeamsFactory with game team as a hash' do
     stat_tracker = StatTracker.new
-    stat_tracker.from_csv(path_3)
+    x = stat_tracker.from_csv(path_3)
+    
     require 'pry'; binding.pry
   end
 
