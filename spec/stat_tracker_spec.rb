@@ -51,7 +51,8 @@ RSpec.describe 'Stat_Tracker' do
   it 'can find the highest scoring visitor' do
     stat_tracker = StatTracker.new
     x = stat_tracker.from_csv(path)
-    stat_tracker.highest_scoring_visitor(x)
+    y = stat_tracker.from_csv(path_2)
+    stat_tracker.highest_scoring_visitor(x, y)
   end
 
 end

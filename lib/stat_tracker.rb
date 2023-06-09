@@ -45,7 +45,7 @@ class StatTracker
   end
 
 
-  def highest_scoring_visitor(csv)
+  def highest_scoring_visitor(csv, csv2)
     highest_scores = {}
     csv.each do |game|
       if highest_scores[game[:away_team_id]] == nil
@@ -57,15 +57,48 @@ class StatTracker
     end
     highest_scores.transform_values! {|v| v.sum.to_f / v.count}
     highest_scores.transform_values! {|v| v.round(2)}
-   # require 'pry'; binding.pry
     top = highest_scores.values.find do |score|
       score == highest_scores.values.max
     end
-    top_team = highest_scores.keys.find do |team|
+    top_team_id = highest_scores.keys.find do |team|
       highest_scores[team] == top
     end
-    require 'pry'; binding.pry
+    top_team = csv2.find do |team|
+      team[:team_id] == top_team_id
+    end
+    top_team[:team_name]
   end
 
+  def highest_scoring_home_team(csv, csv2)
+    highest_scores = {}
+    csv.each do |game|
+      if highest_scores[game[:home_team_id]] == nil
+        highest_scores[game[:home_team_id]] = []
+        highest_scores[game[:home_team_id]] << game[:home_goals].to_i
+      else 
+        highest_scores[game[:home_team_id]] << game[:home_goals].to_i
+      end
+    end
+    highest_scores.transform_values! {|v| v.sum.to_f / v.count}
+    highest_scores.transform_values! {|v| v.round(2)}
+    top = highest_scores.values.find do |score|
+      score == highest_scores.values.max
+    end
+    top_team_id = highest_scores.keys.find do |team|
+      highest_scores[team] == top
+    end
+    top_team = csv2.find do |team|
+      team[:team_id] == top_team_id
+    end
+    top_team[:team_name]
+  end
+
+
+#This method starts with a hash where the key is the team_id and the value is an array of the goals if home/away
+#The value is then summed, averaged, and rounded.
+#top is equal to the highest average score per game
+#top_team_id finds the team_id associated with the highest average score per game
+#The method then searches the othe csv to find the team associated with that team_id and assigns them to top_team
+#return top_team[:team_name] for a string that represents the team name.
 
 end
