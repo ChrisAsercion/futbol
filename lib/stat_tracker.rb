@@ -50,13 +50,21 @@ class StatTracker
     csv.each do |game|
       if highest_scores[game[:away_team_id]] == nil
         highest_scores[game[:away_team_id]] = []
-        highest_scores[game[:away_team_id]] << game[:away_goals]
+        highest_scores[game[:away_team_id]] << game[:away_goals].to_i
       else 
-        highest_scores[game[:away_team_id]] << game[:away_goals]
+        highest_scores[game[:away_team_id]] << game[:away_goals].to_i
       end
     end
+    highest_scores.transform_values! {|v| v.sum.to_f / v.count}
+    highest_scores.transform_values! {|v| v.round(2)}
+   # require 'pry'; binding.pry
+    top = highest_scores.values.find do |score|
+      score == highest_scores.values.max
+    end
+    top_team = highest_scores.keys.find do |team|
+      highest_scores[team] == top
+    end
     require 'pry'; binding.pry
-
   end
 
 
