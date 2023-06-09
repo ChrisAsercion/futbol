@@ -6,9 +6,9 @@ require "csv"
 class StatTracker 
   
   def initialize
-    @teams = []
-    @game_teams = []
-    @games = []
+    # @teams = []
+    # @game_teams = []
+    # @games = []
   end
 
   def from_csv(path)
