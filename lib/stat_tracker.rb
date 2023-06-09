@@ -47,6 +47,7 @@ class StatTracker
 
   def highest_scoring_visitor(csv, csv2)
     highest_scores = {}
+    require 'pry'; binding.pry
     csv.each do |game|
       if highest_scores[game[:away_team_id]] == nil
         highest_scores[game[:away_team_id]] = []
