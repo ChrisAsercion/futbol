@@ -67,6 +67,7 @@ class StatTracker
   end
 
   def best_offense
+
     team_goals = Hash.new(0)
     @game_teams_factory.game_teams.each do |game|
       team_goals[game[:team_id]] += game[:goals].to_i
@@ -87,4 +88,32 @@ class StatTracker
     end
     look_up_team_name(lsv[:away_team_id])  
   end
+
+    best_offense_team_id = goals_per_team.max_by { |team_id, goals| goals }[0]
+    best_team = @team_factory.teams.find do |team|
+      if best_offense_team_id == team[:team_id]
+        team
+      end
+    end
+    best_team[:team_name]  
+  end
+
+
+    worst_offense_team_id = goals_per_team.min_by { |team_id, goals| goals }[0]
+    worst_team = @team_factory.teams.find do |team|
+      if worst_offense_team_id == team[:team_id]
+        team
+      end
+    end
+    worst_team[:team_name] 
+  end
+
+  def goals_per_team
+    team_goals = Hash.new(0)
+    @game_teams_factory.game_teams.each do |game|
+      team_goals[game[:team_id]] += game[:goals].to_i
+    end
+    team_goals
+  end
+
 end
