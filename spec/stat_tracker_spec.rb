@@ -57,4 +57,14 @@ RSpec.describe 'Stat_Tracker' do
       expect(stat_tracker.best_offense).to eq("Sporting Kansas City")
     end
   end
+
+  context 'team_stats_methods' do
+    it "can calculate the lowest scoring visitor" do  
+      stat_tracker = StatTracker.new
+      stat_tracker.from_csv(path)
+      stat_tracker.from_csv(path_2)
+      stat_tracker.from_csv(path_3)
+      expect(stat_tracker.lowest_scoring_visitor).to eq("Sporting Kansas City")
+    end
+  end
 end

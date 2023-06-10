@@ -21,6 +21,7 @@ class GameFactory
       }
       @games.push(game_details)
     end
+    @games
   end
 
   def percentage_home_wins

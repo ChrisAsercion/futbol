@@ -72,17 +72,19 @@ class StatTracker
       team_goals[game[:team_id]] += game[:goals].to_i
     end
     best_offense_team_id = team_goals.max_by { |team_id, goals| goals }[0]
-    best_team = @team_factory.teams.find do |team|
-      if best_offense_team_id == team[:team_id]
-        team
-      end
-    end
-    best_team[:team_name]  
+    look_up_team_name(best_offense_team_id)
   end
 
+  def look_up_team_name(team_id)
+    @team_factory.teams.find do |team|
+      team_id == team[:team_id]
+    end[:team_name]
+  end
 
-
-
-
-  
+  def lowest_scoring_visitor
+    lsv = @game_factory.games.min_by do |game|
+      game[:away_goals]
+    end
+    look_up_team_name(lsv[:away_team_id])  
+  end
 end
