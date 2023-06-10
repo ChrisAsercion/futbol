@@ -23,12 +23,12 @@ class StatTracker
   end
 
   def count_of_games_by_season(csv_array)
-    @games_by_season = {}
+    games_by_season = {}
     csv_array.each do |game|
-      if @games_by_season[game[:season]] != nil 
-        @games_by_season[game[:season]] += 1
+      if games_by_season[game[:season]] != nil 
+        games_by_season[game[:season]] += 1
       else 
-        @games_by_season[game[:season]] = 1
+        games_by_season[game[:season]] = 1
       end 
     end 
   end 
