@@ -61,7 +61,7 @@ class StatTracker
     end
 
     end
-   p hash.values.max
+  return hash.values.max
   end
 
   def lowest_sum(arr) 
@@ -80,7 +80,7 @@ class StatTracker
     end
 
     end
-   p hash.values.min
+  return hash.values.min
   end
   
 
