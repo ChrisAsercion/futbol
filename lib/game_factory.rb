@@ -1,10 +1,9 @@
-class GameFactory
+class GameFactory 
   attr_reader :games
 
   def initialize
     @games = []
   end 
-  
   
   def create_games(path)
     CSV.foreach(path, headers: true, header_converters: :symbol) do |row|
@@ -20,10 +19,10 @@ class GameFactory
         :venue => row[:venue],
         :venue_link => row[:venue_link]
       }
-    @games.push(game_details)
+      @games.push(game_details)
+    end
   end
-end
-  
+
   def percentage_home_wins
     home_wins = 0 
     @games.each do |game|
@@ -31,7 +30,25 @@ end
         home_wins += 1
       end
     end
-    home_wins / @games.count * 100
+    percentage_wins = (home_wins.to_f / @games.count.to_f) * 100
+    percentage_wins.round(2)
+  end
+  
+  def percentage_visitor_wins
+    visitor_wins = 0 
+    @games.each do |game|
+      if game[:away_goals] > game[:home_goals]
+        visitor_wins += 1
+      end
+    end
+    percentage_wins = (visitor_wins.to_f / @games.count.to_f) * 100
+    percentage_wins.round(2)
   end
 
+  def percentage_ties
+    ties = @games.count do |game|
+      game[:away_goals] == game[:home_goals]
+    end
+    (ties.to_f / @games.length).round(2)
+  end
 end
